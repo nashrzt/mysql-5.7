@@ -1,0 +1,48 @@
+---
+- name: Set the root password.
+  mysql_user:
+    name: root
+    host: localhost
+    password: root
+#    encrypted: yes
+  become: true
+
+
+- mysql_user:
+    name: bigbrain
+    login_user: root
+    login_password: root
+    password: bigbrain 
+#    encrypted: yes
+    host: "{{ mysql_user_host }}"
+    priv: "{{ mysql_priv }}"
+    state: present
+
+
+- name: Create a new database with name 'engine'
+  mysql_db:
+    name: engine
+    login_user: root
+    login_password: root
+#    host: "{{ mysql_user_host }}"
+#    priv: "{{ mysql_priv }}"
+    state: present
+
+- name: Create a new database with name 'bigbrain_engine'
+  mysql_db:
+    name: bigbrain_engine
+    login_user: root
+    login_password: root
+#    host: "{{ mysql_user_host }}"
+#    priv: "{{ mysql_priv }}"
+    state: present
+
+- name: Create a new database with name 'bigbrain'
+  mysql_db:
+    name: bigbrain
+    login_user: root
+    login_password: root
+#    host: "{{ mysql_user_host }}"
+#    priv: "{{ mysql_priv }}"
+    state: present
+
